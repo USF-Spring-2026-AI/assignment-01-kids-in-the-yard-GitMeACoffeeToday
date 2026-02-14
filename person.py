@@ -32,9 +32,12 @@ class Person:
             if self.year_born >= 1960:
                 new_spouse.year_born = random.randrange(-10,
                                                         11) + self.year_born  # within 10 years of the original person birth
+
             else:
                 new_spouse.year_born = random.randrange(0,
                                                         10) + self.year_born  # within 10 years of the original person birth
+            if new_spouse.year_born > 2120: # safety net in case we get an invalid year, the spouse gets magically nonexisted
+                return None
 
             new_spouse.year_died = dfh.gen_year_died(new_spouse)
 
@@ -53,18 +56,17 @@ class Person:
         child_list: list[Person] = []
 
         for x in range(len(child_birth_ages)):
-            new_person = Person()
+            if child_birth_ages[x] <= 2120:
+                new_person = Person()
 
-            new_person.year_born = child_birth_ages[x]
-            new_person.year_died = dfh.gen_year_died(new_person)
+                new_person.year_born = child_birth_ages[x]
+                new_person.year_died = dfh.gen_year_died(new_person)
 
-            new_person.first_name = dfh.gen_random_firstname(dfh.normalize_to_decade(self))
-            new_person.last_name = dfh.gen_random_lastname(dfh.normalize_to_decade(self))
+                new_person.first_name = dfh.gen_random_firstname(dfh.normalize_to_decade(self))
+                new_person.last_name = dfh.gen_random_lastname(dfh.normalize_to_decade(self))
 
-            new_person.parent = self
+                new_person.parent = self
 
-            child_list.append(new_person)
-
+                child_list.append(new_person)
+        self.children.extend(child_list)
         return tuple(child_list)
-
-

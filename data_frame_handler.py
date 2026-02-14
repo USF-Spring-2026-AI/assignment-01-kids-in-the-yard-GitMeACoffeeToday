@@ -32,8 +32,11 @@ class DataFrameHandler:
             weights[i] = weights[i] / total_weight
 
     @staticmethod
-    def normalize_to_decade(person:Person) -> str:
-        return f'{math.floor(person.year_born/10)*10}s'
+    def normalize_to_decade(person:Person, int_mode:int = 0):
+        if int_mode == 1:
+            return math.floor(person.year_born / 10) * 10
+        else:
+            return f'{math.floor(person.year_born / 10) * 10}s'
 
 
 
