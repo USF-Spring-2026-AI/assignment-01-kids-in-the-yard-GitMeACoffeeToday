@@ -1,7 +1,8 @@
 from data_frame_handler import DataFrameHandler
 from person import Person
 
-def build_family_tree(person_list: list[Person], dataframehandler:DataFrameHandler, master_list:list[Person] = None):
+def build_family_tree(person_list: list[Person], dataframehandler: DataFrameHandler, master_list: list[Person] = None):
+    """Builds the family tree recursively, master list is for printing purposes and logs all persons (spouses included via Person.spouse)"""
     if len(person_list) == 0:
         return
     else:
@@ -17,7 +18,8 @@ def build_family_tree(person_list: list[Person], dataframehandler:DataFrameHandl
         build_family_tree(person_list, dataframehandler, master_list)
 
 
-def tree_counter(to_visit: list[Person], dataframehandler:DataFrameHandler, visited_count:int = 0) -> int:
+def tree_counter(to_visit: list[Person], dataframehandler: DataFrameHandler, visited_count: int = 0) -> int:
+    """Counts the number of Persons in the tree, given a progenitor person"""
     if len(to_visit) == 0:
         return visited_count
     else:
@@ -29,7 +31,8 @@ def tree_counter(to_visit: list[Person], dataframehandler:DataFrameHandler, visi
             return tree_counter(to_visit, dataframehandler, visited_count + 1)
 
 
-def tree_name_by_decade(to_visit: list[Person], dataframehandler:DataFrameHandler, name_decades:dict = None) -> dict:
+def tree_name_by_decade(to_visit: list[Person], dataframehandler: DataFrameHandler, name_decades: dict = None) -> dict:
+    """Counts the number of Persons in the tree by decade."""
     if len(to_visit) == 0:
         return name_decades
     else:
@@ -52,7 +55,8 @@ def tree_name_by_decade(to_visit: list[Person], dataframehandler:DataFrameHandle
         return tree_name_by_decade(to_visit, dataframehandler, name_decades)
 
 
-def tree_find_dup_names(to_visit: list[Person], dataframehandler:DataFrameHandler, dup_names:dict = None) -> dict:
+def tree_find_dup_names(to_visit: list[Person], dataframehandler: DataFrameHandler, dup_names: dict = None) -> dict:
+    """Counts the number of Person names that repeat by decade."""
     if len(to_visit) == 0:
         return dup_names
     else:
@@ -64,7 +68,7 @@ def tree_find_dup_names(to_visit: list[Person], dataframehandler:DataFrameHandle
 
         # TO-DO: Account for the spouse name as well. POTENTIAL ISSUE WITH COUNTING, DOUBLE CHECK WHEN YOU GET THE CHANCE.
         if curr_result is not None:
-            dup_names[curr_name] = curr_result+1
+            dup_names[curr_name] = curr_result + 1
         else:
             dup_names[curr_name] = 1
 
