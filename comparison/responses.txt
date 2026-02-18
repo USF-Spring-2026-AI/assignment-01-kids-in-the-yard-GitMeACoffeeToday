@@ -1,0 +1,27 @@
+● Which tool(s) did you use?
+    - ChatGPT (unpaid vers.)
+
+● If you used an LLM, what was your prompt to the LLM?
+    - see prompt.txt (its really long)
+
+● What differences are there between your implementation and the LLM?
+    - LLM has created many more files and spread out implementation across them, some minor style changes.
+    - Did not implement an interactive interface with the user despite being asked to in the prompt.
+
+● What changes would you make to your implementation in general based on suggestions from the
+LLM?
+    - Nothing. The LLM didn't make use of the pandas package, which would have simplified the amount of code and files necessary
+    to acomplish what it was instructed to. There are some minor style-related things that I would probably use going forward, but
+    functionality-wise, not much. Additionally, unless you're using the paid version of GPT, you can only upload 3 files daily.
+    When it comes to the .csv files, I found it rather important to look over their contents first to understand the data before
+    attempting to implement this assignment. The fact that GPT has a context limit for big prompts can be is problematic.
+        - Uploading files for the LLM to understand is one thing, limiting that functionality to paid is another. Are people going to
+        pay to program? What if the internet goes down and you can't just shove six or more .csv files into the LLM and expect it to
+        produce magically working code? (it took a few iterations to fix some initial bugs, but god forbid if I tried to make it produce
+        exactly what the assignment wanted).
+            - God forbid if there were more than 6 .csv files, each with their own nuances in data organization (tirade over).
+
+● What changes would you refuse to make?
+    - Not using pandas when pandas would simplify the amount of code needed to get the implementation working.
+    - Implementing this entirely through an LLM. I found it a soulless and mind numbingly boring effort, as well as a
+    somewhat frustrating venture to get this cl*nker to understand the contents of the .csv files, as well as the assignment.

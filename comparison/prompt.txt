@@ -1,0 +1,96 @@
+The context is Python and Tree data structures.
+
+Give me python code that, given a set of CSV files, will generate and interact with a Family Tree.
+This Tree will begin with two people born in 1950 and continue until 2120.
+Your implementation must be spread across multiple files in a logical manner, utilize the principles of Object-Oriented-Programming, and adhere to PEP8 Standards.
+
+Assume all files are in the current directory, you will have some data from the csv files for reference.
+
+birth_and_marriage_rates.csv
+decade,birth_rate,marriage_rate
+1950s,3.24,0.78
+
+first_names.csv
+decade,gender,name,frequency
+1950s,male,James,0.139496
+
+gender_name_probability.csv
+decade,gender,probability
+1950s,male,0.514
+
+last_names.csv
+Decade,Rank,LastName
+1950s,1,Smith
+
+life_expectancy.csv
+Year,Period life expectancy at birth
+1950,61.95
+
+rank_to_probability.csv
+0.1800,0.0900,0.0600,0.0450,0.0360,0.0300,0.0257,0.0225,0.0200,0.0180,0.0164,0.0150,0.0138,0.0129,0.0120,0.0113,0.0106,0.0100,0.0094,0.0090,0.0086,0.0082,0.0078,0.0075,0.0072,0.0070,0.0066,0.0064,0.0062,0.0060
+
+
+Here are the relevant fields for each person in this Tree.
+- Year Born (N/A)
+	- The first two people must be born in 1950. The Year Born
+values for other people are described in the Children row.
+
+- Year Died (life_expectancy.csv)
+	- Based on the decade in which a person is born, that person
+has a life expectancy listed in this file. Randomly generate the
+length of the person’s life based on the contents of this file, +/-
+10 years. For example, a person born in 2067 will have a Year
+Died between 2138 - 2158 — i.e. a life expectancy of 81.51
+years (2148), plus or minus 10 years.
+
+- First Name (first_names.csv, gender_name_probability.csv)
+	- A new person’s first name is based on Year Born, gender and
+the frequency of names found during that year. For example, a
+person assigned male at birth in the 1950s has more than a
+13.9% probability of being named “James.”
+
+- Last Name (last_names.csv, rank_to_probability.csv)
+	- The last name for a person is based on the following rules:
+1. Any person directly descended from the first two
+people keep the last name of either of the people.
+2. For any person not directly descended from the first
+two people, the last name may be found in the
+last_names.csv file. In this file, find the rank of the last
+name (1 - 30). Your implementation will use this rank
+to find the probability of each last name based on the
+rank from the rank_to_probability.csv file. You may
+notice that the sum of the probabilities is not 1.0.
+
+- Partner / Spouse (birth_and_marriage_rates.csv)
+	- A person has a probability of having a spouse or partner as
+defined in the “marriage_rate” column of this file. Your
+implementation must create a partner — a “new” person — for
+such a marriage or partnership and that the partner’s Year
+Born is randomly within 10 years of the partner’s. You may
+assume that any marriage or partnership does not involve a
+change of name, and that a person can have at most 1
+partner.
+
+- Children (birth_and_marriage_rates.csv)
+	- A single person or a person with a partner / spouse may have
+a number of children as defined in the “birth_rate” column of
+this file. The number of potential children depends on the
+decade of the person’s birth, +/- 1.5 children. For example, a
+person born in the 2010s (between 2010 and 2019) will have
+between 1 (2.05 - 1.5 = 0.55; round up to 1) and 4 (2.05 + 1.5
+= 3.55; round up to 4) children.
+The Year Born field for the children will be distributed evenly
+from the elder parent’s Year Born + 25 years through parent’s
+Year Born + 45 years. For example, a parent born in 1983 will
+have the child / children born between 2008 and 2028.
+For graduate students in CS 562, you must additionally
+implement the following functionality: a person who does not
+have a partner or spouse will have 1 child fewer than a person
+who has a partner or spouse.
+
+
+Once the family tree has been generated, you will allow the user to query or interact with the tree,
+specifically allowing:
+1. Total number of people in the tree
+2. Total number of people in the tree by year
+3. Duplicate names

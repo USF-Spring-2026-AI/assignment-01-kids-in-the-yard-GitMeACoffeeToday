@@ -19,3 +19,7 @@ See assignment details on Canvas.
 - main.py
     - Contains the implementation for user interactivity, currently supports the
       (3) required interactions as specified in the assignment details.
+
+
+- comparison
+  - Contains the LLM generated code, the responses (responses.txt) to the given questions on the assignment, and the prompt used (prompt.txt).
