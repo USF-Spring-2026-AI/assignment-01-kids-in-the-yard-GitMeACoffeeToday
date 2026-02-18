@@ -32,6 +32,7 @@ while user_input.lower() != 'q' and user_input.lower() != 'quit':
     print('(T)otal number of people')
     print('(N)ames duplicated')
     print('Total number of people by (D)ecade')
+    print('(Q)uit')
     print('> ', end='')
 
     user_input = input()
